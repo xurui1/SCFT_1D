@@ -15,5 +15,6 @@ using namespace std;
 
 
 double kappa;
+double r_0;
 int initial;
 int Coord;

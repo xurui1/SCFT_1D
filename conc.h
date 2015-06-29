@@ -61,7 +61,7 @@ double Conc(double **phi,double **w,int *Ns,double ds,double dr, double *mu,doub
     
 
     // Normalizing with respect to box volume
-    Q/=volume/(2.0*Pi);
+    Q/=volume;
     
     cout<<"Q: "<< Q<<endl;
     

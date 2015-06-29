@@ -1,3 +1,15 @@
+double rterm(int i, double dr, double ds){
+    
+    if (Coord==1){
+        return 0;
+    }
+    else{
+        return ((double)Coord-1.0)*(ds/((dr*((double)i)+r_0)*4.0*dr));
+    }
+}
+
+
+
 
 //Build LHS matrix
 void Matrix_r(double *w, double dr, double ds, double *rmid, double *rupper, double *rlower){
@@ -8,8 +20,8 @@ void Matrix_r(double *w, double dr, double ds, double *rmid, double *rupper, dou
     }
     
     for (i=0;i<(int)Nr-1;i++){
-        rupper[i]=-(ds/(2.0*pow(dr,2.0)))/*-((int)Coord-1)*(ds/((dr*((double)i+1.0))*2.0*dr))*/;
-        rlower[i]=-(ds/(2.0*pow(dr,2.0)))/*+((int)Coord-1)*(ds/((dr*((double)i+1.0))*2.0*dr))*/;
+        rupper[i]=-(ds/(2.0*pow(dr,2.0)))-rterm(i,dr,ds);
+        rlower[i]=-(ds/(2.0*pow(dr,2.0)))+rterm(i,dr,ds);
     }
 
     
@@ -38,18 +50,13 @@ void solvediffyQ(double **q, double *w, double *qint, double ds, int Ns, double 
     
     
     for (s=1;s<(int)Ns+1;s++){
-        
-        //Empty RHS vector #2
-        for (i=0;i<Nr;i++){
-            bvecr[i]=0.0;
-        }
     
         Matrix_r(w,dr,ds,rmid,rupper,rlower);
             
         for (i=0;i<Nr;i++){
             gamma=1.0-(ds/(pow(dr,2.0)))-((ds/2.0)*w[i]);
-            betaL=ds/(2.0*pow(dr,2.0))/*-((int)Coord-1)*(ds/((dr*((double)i+1.0))*2.0*dr))*/;
-            betaU=ds/(2.0*pow(dr,2.0))/*+((int)Coord-1)*(ds/((dr*((double)i+1.0))*2.0*dr))*/;
+            betaL=ds/(2.0*pow(dr,2.0))-rterm(i,dr,ds);
+            betaU=ds/(2.0*pow(dr,2.0))+rterm(i,dr,ds);
             
             if(i==0){
                 bvecr[i]=gamma*qint[i]+(betaL+betaU)*qint[i+1];
@@ -62,10 +69,10 @@ void solvediffyQ(double **q, double *w, double *qint, double ds, int Ns, double 
             }
         }
         
-        //Use TDMA to solve matrix algebra problem
+        //Apply TDMA
         TDMA(bvecr,Nr,rlower,rmid,rupper);
             
-        //Now we have our solution for all i,j for s, from s-1. Full step completed.
+        //Now we have our solution for all i for s, from s-1. Full step completed.
         for (i=0;i<Nr;i++){
             q[i][s]=bvecr[i];
             //cout<<"i: "<<i<<" s: "<<s<<" q: "<<q[i][s]<<endl;
@@ -85,4 +92,5 @@ void solvediffyQ(double **q, double *w, double *qint, double ds, int Ns, double 
 
 
 }
+
 

@@ -80,7 +80,7 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
             }
         }
     
-        if (deltafE<precision && deltaW<2.0){break;} //Convergence condition
+        if (deltafE<precision && deltaW<precision){break;} //Convergence condition
         
     }
     

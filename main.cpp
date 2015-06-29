@@ -48,7 +48,8 @@ int main( ){
     srand48(iseed);
     
     //Set parameters
-    parameters(chi,f,&ds,Ns,&dr,chiMatrix,mu,&volume);
+    parameters(chi,f,&ds,Ns,&dr,chiMatrix,mu);
+    volume=vol(dr);
     
     //Calculate homogeneous free energy
     fE_hom=homogfE(mu,chiMatrix,f);

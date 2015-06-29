@@ -26,7 +26,7 @@ double fE(double **newW, double **phi, double **chiMatrix, double dr, double vol
 
     
     //middle
-    for (i=1;i<Nr-1;i++){
+    for (i=1;i<(int)Nr-1;i++){
         for(ii=0;ii<ChainType;ii++){
             for(jj=0;jj<ChainType;jj++){
                 fEchi+=phi[ii][i]*chiMatrix[ii][jj]*phi[jj][i]*dV(i,dr);

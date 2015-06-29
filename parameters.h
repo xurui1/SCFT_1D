@@ -1,10 +1,11 @@
-void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chiMatrix,double *mu, double *volume){
+void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chiMatrix,double *mu){
     
     int Ds=100;
+    r_0=10.0;
     double delr;
     
     initial=0;
-    Coord=1; //if 1->Cartesian, if 2->Cylindrical, if 3->Spherical coordinate system
+    Coord=2; //if 1->Cartesian, if 2->Cylindrical, if 3->Spherical coordinate system
     
     //Length ratio of c homopolymer to diblock copolymer
     kappa=1.0;
@@ -41,20 +42,6 @@ void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chi
     //Step length along polymer
     *ds=1.0/Ds;
     
-    //Volume
-    if (Coord==1){
-        *volume=((double)Nr-1)*pow(delr,3);
-    }
-    else if (Coord==2){
-        *volume=Pi*((double)Nr-1)*pow(delr,3);
-    }
-    else if (Coord==3){
-        *volume=Pi*(4.0/3.0)*((double)Nr-1)*pow(delr,3);
-    }
-    else{
-        cout<<"Choose another integer for Coordinate"<<endl;
-        return;
-    }
     
     //Interaction Matrix
     chiMatrix[0][0]=0.0;

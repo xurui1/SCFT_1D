@@ -3,7 +3,7 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
     
     double  currentfE, oldfE, deltafE;
     int     maxIter=10000;
-    double precision=1e-5;          //convergence condition
+    double precision=1e-6;          //convergence condition
     int     i,iter,chain,ii,jj;
     double  Q;
     double  fE_int, fES;            //interaction free energy and chain partition function fE
@@ -21,8 +21,8 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
     currentfE=0.0;
     deltafE=0.0;
     
-    epsilon=0.001;
-    gamma=0.001;
+    epsilon=0.05;
+    gamma=0.05;
     
     iter=0;
     std::ofstream outputFile("./results/fE.dat");
@@ -49,16 +49,12 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
         
         //Calculate components for new field and interaction free energies
         for(i=0;i<Nr;i++){
-                for(ii=0;ii<ChainType;ii++){
-                    for(jj=0;jj<ChainType;jj++){
-                        newW[ii][i]+=((chiMatrix[ii][jj]*phi[jj][i])+eta[i]);
-                    }
-                    /*if (fabs(newW[ii][i])>1e3){
-                        cout<<i<<" "<<ii<<" newW problem: "<<newW[ii][i]<<endl;
-                        exit(EXIT_FAILURE);
-                    }*/
-                    delW[ii][i]=newW[ii][i]-w[ii][i];
-                    deltaW+=fabs(delW[ii][i])*dV(i,dr);
+            for(ii=0;ii<ChainType;ii++){
+                for(jj=0;jj<ChainType;jj++){
+                    newW[ii][i]+=((chiMatrix[ii][jj]*phi[jj][i])+eta[i]);
+                }
+                delW[ii][i]=newW[ii][i]-w[ii][i];
+                deltaW+=fabs(delW[ii][i])*dV(i,dr);
                 }
         }
         fE_int=fE(newW,phi,chiMatrix,dr,volume);

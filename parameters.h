@@ -1,7 +1,7 @@
 void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chiMatrix,double *mu){
     
     int Ds=100;
-    r_0=10.0;
+    r_0=100.0;
     double delr;
     
     initial=0;
@@ -17,7 +17,7 @@ void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chi
     
     //Chemical potential array
     mu[0]=0.0;
-    mu[1]=-10.0;
+    mu[1]=-20.0;
     
     //Chain fraction array
     f[0]=0.5;

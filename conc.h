@@ -56,7 +56,7 @@ double Conc(double **phi,double **w,int *Ns,double ds,double dr, double *mu,doub
     solvediffyQ(qdagA,w[0],qintA,ds,Ns[0],dr);
     solvediffyQ(qdagB,w[1],qintB,ds,Ns[1],dr);
     
-    // Here we are get the single chain partition functions Q_AB+Q_C
+    // Here we get the single chain partition functions Q_AB+Q_C
     Q=q_partition(qdagB,qC,dr,Ns,mu,volume);
         
     cout<<"Q: "<< Q<<endl;

@@ -36,7 +36,7 @@ double fE(double **newW, double **phi, double **chiMatrix, double dr, double vol
     }
 
     //normalize by box size
-    fEchi/=volume;
+    fEchi/=2.0*volume;
     fEW/=volume;
     
     fE_int=fEchi-fEW;

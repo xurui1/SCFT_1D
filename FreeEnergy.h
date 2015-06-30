@@ -21,8 +21,8 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
     currentfE=0.0;
     deltafE=0.0;
     
-    epsilon=0.01;
-    gamma=0.01;
+    epsilon=0.001;
+    gamma=0.001;
     
     iter=0;
     std::ofstream outputFile("./results/fE.dat");
@@ -58,7 +58,7 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
                         exit(EXIT_FAILURE);
                     }*/
                     delW[ii][i]=newW[ii][i]-w[ii][i];
-                    deltaW+=fabs(delW[ii][i]);
+                    deltaW+=fabs(delW[ii][i])*dV(i,dr);
                 }
         }
         fE_int=fE(newW,phi,chiMatrix,dr,volume);
@@ -71,6 +71,7 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
         fES=Q;
         oldfE=currentfE;
         currentfE=-fES+fE_int;
+        
         if (fabs(currentfE)>1e3){
             cout<<"fE too large"<<endl;
             exit(EXIT_FAILURE);

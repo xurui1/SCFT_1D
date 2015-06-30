@@ -1,0 +1,1 @@
+Change to TDMA input vector allowed for proper calculation at box size of 4 Rg^2. So, that was the problem, and it was just amplified at small box sizes.

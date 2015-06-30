@@ -21,10 +21,10 @@ double vol(double dr){
         return ((double)Nr-1.0)*pow(dr,3.0);
     }
     else if (Coord==2){
-        return Pi*((double)Nr-1.0)*pow(dr,3.0);
+        return (1.0/2.0)*(pow(r_0+((double)Nr-1.0)*dr,2.0)-pow(r_0,2.0))*pow(dr,2.0);
     }
     else if (Coord==3){
-        return Pi*(4.0/3.0)*pow(((double)Nr-1.0),2)*pow(dr,3.0);
+        return (1.0/3.0)*(pow(r_0+((double)Nr-1.0)*dr,3.0)-pow(r_0,3.0))*pow(dr,2.0);
     }
     else{
         cout<<"Choose another integer for Coordinate"<<endl;

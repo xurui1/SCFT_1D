@@ -5,7 +5,7 @@ void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chi
     double delr;
     
     initial=0;
-    Coord=2; //if 1->Cartesian, if 2->Cylindrical, if 3->Spherical coordinate system
+    Coord=1; //if 1->Cartesian, if 2->Cylindrical, if 3->Spherical coordinate system
     
     //Length ratio of c homopolymer to diblock copolymer
     kappa=1.0;
@@ -14,9 +14,6 @@ void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chi
     chi[0]=20.0;        //Chi_AB
     chi[1]=20.0;        //Chi_BC
     chi[2]=0.0;         //Chi_AC
-    
-     //Pore Location
-
     
     //Chemical potential array
     mu[0]=0.0;
@@ -32,7 +29,7 @@ void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chi
     Ns[1]=(Ds*f[1]);
     Ns[2]=(Ds*f[2]);
     
-    cout<<Ns[0]<<" "<<Ns[1]<<" "<<Ns[2]<<endl;
+    //cout<<Ns[0]<<" "<<Ns[1]<<" "<<Ns[2]<<endl;
     
     //Step size in r,z direction
     *dr=0.08;
@@ -54,4 +51,4 @@ void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chi
     chiMatrix[2][1]=chi[1];
     chiMatrix[2][2]=0.0;
     
-};
+} 

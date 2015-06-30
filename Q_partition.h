@@ -1,5 +1,5 @@
 
-double q_partition(double **qdagB,double **qC, double dr, int *Ns, double *mu){
+double q_partition(double **qdagB,double **qC, double dr, int *Ns, double *mu, double volume){
     
     double Q,Q_AB,Q_C;
     int i;
@@ -23,10 +23,11 @@ double q_partition(double **qdagB,double **qC, double dr, int *Ns, double *mu){
     
     Q_AB=exp(mu[0])*Q_AB;
     Q_C=(exp(mu[1]*kappa)*Q_C)/kappa;
-    cout<<"Q_AB: "<<Q_AB<<" Q_C: "<<Q_C<<endl;
     //I'm adding the two single chain partition functions together for the return function
     Q=Q_AB+Q_C;
+    // Normalizing with respect to box volume
+    Q/=volume;
     
     
     return Q;
-};
+}

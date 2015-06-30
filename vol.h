@@ -13,7 +13,7 @@ double dV(int i,double dr){
     }
     
     return d_V;
-};
+}
 
 double vol(double dr){
     //Volume
@@ -24,7 +24,7 @@ double vol(double dr){
         return Pi*((double)Nr-1.0)*pow(dr,3.0);
     }
     else if (Coord==3){
-        return Pi*(4.0/3.0)*((double)Nr-1.0)*pow(dr,3.0);
+        return Pi*(4.0/3.0)*pow(((double)Nr-1.0),2)*pow(dr,3.0);
     }
     else{
         cout<<"Choose another integer for Coordinate"<<endl;

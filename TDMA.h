@@ -19,4 +19,4 @@ void TDMA(double *x, const size_t N, const double a[], const double b[], const d
     }
     
     destroy_1d_double_array(cprime);
-};
+}

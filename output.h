@@ -18,4 +18,4 @@ void output(double dr, double **phi,double **w){
     outputFile2.close();
 
     
-};
+}

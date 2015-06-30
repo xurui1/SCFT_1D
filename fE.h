@@ -43,4 +43,4 @@ double fE(double **newW, double **phi, double **chiMatrix, double dr, double vol
 
     return fE_int;
     
-};
+}

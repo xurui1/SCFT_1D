@@ -35,7 +35,7 @@ void phi_total(double *phiA, double *phiB, double *phiC, double dr, double volum
     cout<<"phiA: "<<phiA_tot<<" phiB: "<<phiB_tot<<" phiC: "<<phiC_tot<<" total: "<<phi_tot<<endl;
     
     
-};
+}
 
 
 void phi_calc(double **phi,double **qA,double **qdagA,double **qB,double **qdagB,double **qC,int *Ns,double*mu,double ds){
@@ -84,4 +84,4 @@ void phi_calc(double **phi,double **qA,double **qdagA,double **qB,double **qdagB
     }
     
     
-};
+}

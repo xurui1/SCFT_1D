@@ -1,0 +1,1 @@
+Changed the input vectors for the ti-diagonal matrix algorithm. Didn’t sufficiently converge, reached ten thousand iterations. Still having problems with dFE,convergence, and concentration of A vs. B.

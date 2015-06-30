@@ -6,9 +6,9 @@ void omega(double **w){
     //Currently will give a lamellar structure in z-direction
     if (initial==0){
         for(i=0;i<Nr;i++){
-            w[0][i]=-5.0*cos(2.0*Pi*(double)i/(double)Nr);
-            w[1][i]=5.0*cos(2.0*Pi*(double)i/(double)Nr);
-            w[2][i]=10.0;
+            w[0][i]=-5.0*cos(2.0*Pi*(double)i/(double)Nr)+(double)((rand() %100)/100.0);
+            w[1][i]=5.0*cos(2.0*Pi*(double)i/(double)Nr)+(double)((rand() %100)/100.0);
+            w[2][i]=10.0+(double)((rand() %100)/100.0);
         }
     }
     
@@ -27,4 +27,4 @@ void omega(double **w){
                 std::cout << w[0][i]<<" "<<w[1][i]<<" "<<w[2][i]<<endl;
     }
     
-};
+}

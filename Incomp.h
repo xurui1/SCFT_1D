@@ -17,9 +17,10 @@ void Incomp(double *eta, double **phi, double *delphi){
                             
         delphi[i]=1.0-ptot;
         eta[i]-=delphi[i];
+        
+        if (fabs(delphi[i])>1e2){
+            cout<<i<<" incomp: "<<delphi[i]<<endl;
+            exit(EXIT_FAILURE);
+        }
     }
-    
-
-
-    
-};
+}

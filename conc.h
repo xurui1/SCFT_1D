@@ -57,12 +57,8 @@ double Conc(double **phi,double **w,int *Ns,double ds,double dr, double *mu,doub
     solvediffyQ(qdagB,w[1],qintB,ds,Ns[1],dr);
     
     // Here we are get the single chain partition functions Q_AB+Q_C
-    Q=q_partition(qdagB,qC,dr,Ns,mu);
-    
-
-    // Normalizing with respect to box volume
-    Q/=volume;
-    
+    Q=q_partition(qdagB,qC,dr,Ns,mu,volume);
+        
     cout<<"Q: "<< Q<<endl;
     
     // Here we do the concentration calculation by integration over box and chain
@@ -85,4 +81,4 @@ double Conc(double **phi,double **w,int *Ns,double ds,double dr, double *mu,doub
     
     return Q;
     
-};
+}

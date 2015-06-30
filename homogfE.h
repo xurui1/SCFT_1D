@@ -76,4 +76,4 @@ double homogfE(double *mu, double **chimatrix, double *f){
     fE_hom=f_int-f_omeg-(exp(mu[0]-wA_ave*f[0]-wB_ave*f[1]))-(exp(kappa*(mu[1]-wC_ave))/kappa);
 
     return fE_hom;
-};
+}

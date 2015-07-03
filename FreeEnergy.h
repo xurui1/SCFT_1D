@@ -3,7 +3,7 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
     
     double  currentfE, oldfE, deltafE;
     int     maxIter=10000;
-    double precision=1e-6;          //convergence condition
+    double precision=1e-5;          //convergence condition
     int     i,iter,chain,ii,jj;
     double  Q;
     double  fE_int, fES;            //interaction free energy and chain partition function fE
@@ -40,20 +40,18 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
         output(dr,phi,w);                   //Output some data to file
     
         
-        //clear omega field update
-        for(i=0;i<Nr;i++){
-            for(ii=0;ii<ChainType;ii++){
-                newW[ii][i]=0.0;
-            }
-        }
+
         
         //Calculate components for new field and interaction free energies
         for(i=0;i<Nr;i++){
             for(ii=0;ii<ChainType;ii++){
+                newW[ii][i]=0.0;            //set field update to zero
                 for(jj=0;jj<ChainType;jj++){
-                    newW[ii][i]+=((chiMatrix[ii][jj]*phi[jj][i])+eta[i]);
+                    newW[ii][i]+=(chiMatrix[ii][jj]*phi[jj][i]);
                 }
+                newW[ii][i]+=eta[i];
                 delW[ii][i]=newW[ii][i]-w[ii][i];
+                w[ii][i]+=(gamma*delW[ii][i]-epsilon*delphi[i]);     //update omega field
                 deltaW+=fabs(delW[ii][i])*dV(i,dr);
                 }
         }
@@ -78,14 +76,8 @@ void FreeEnergy(double **w, double **phi, double *eta, int *Ns, double ds, doubl
         std::cout<<iter<<" fE:"<<currentfE<< " dfE:"<<currentfE-fE_hom<<" " << deltaW<<" "<<fE_hom<<std::endl;
         outputFile << iter << " " << currentfE<< " " << currentfE-fE_hom<<" "<< deltaW<<std::endl;
         
-        //Update omega field. Can we add Anderson mixing for this system?
-        for(i=0;i<Nr;i++){
-            for(chain=0;chain<ChainType;chain++){
-                w[chain][i]+=(gamma*delW[chain][i]-epsilon*delphi[i]);
-            }
-        }
-    
-        if (deltafE<precision && deltaW<2.0){break;} //Convergence condition
+
+        if (deltafE<precision && deltaW<0.5){break;} //Convergence condition
         
     }
     

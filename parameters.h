@@ -32,7 +32,7 @@ void parameters(double *chi,double *f,double *ds,int *Ns,double *dr,double **chi
     //cout<<Ns[0]<<" "<<Ns[1]<<" "<<Ns[2]<<endl;
     
     //Step size in r,z direction
-    *dr=0.16;
+    *dr=0.08;
     delr=*dr;
     
     
